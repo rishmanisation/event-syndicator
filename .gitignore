@@ -2,3 +2,4 @@ env/
 syndicator/db.sqlite3
 syndicator/event_synd/migrations
 *.pyc
+
