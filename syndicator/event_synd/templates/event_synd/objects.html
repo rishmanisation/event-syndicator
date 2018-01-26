@@ -1,0 +1,13 @@
+{% if products %}
+    {% for product in products %}
+        <ul>
+            <li> {{ product.product_name }}</li>
+            <li> {{ product.product_description }}</li>
+            <li> {{ product.product_price }}</li>
+        </ul>
+    {% endfor %}
+{% else %}
+    <p> No products found </p>
+{% endif %}
+
+<a href="/home">Return home</a>
