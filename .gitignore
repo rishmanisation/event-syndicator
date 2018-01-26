@@ -1,7 +1,4 @@
 env/
 syndicator/db.sqlite3
 syndicator/event_synd/migrations
-syndicator/event_synd/__pycache__
-syndicator/syndicator/__pycache__
-syndicator/event_synd/*.pyc
-syndicator/syndicator/*.pyc
+*.pyc
