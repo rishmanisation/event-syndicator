@@ -1,6 +1,6 @@
 from django import forms
 
-class AddProductForm(forms.Form):
+class AddEventForm(forms.Form):
 
     name = forms.CharField(
         max_length=140,
@@ -17,12 +17,41 @@ class AddProductForm(forms.Form):
         })
     )
 
-    price = forms.CharField(
-        max_length=10,
-        required=True,
-        widget=forms.TextInput(attrs={
-            'placeholder': 'price'
-        })
+    price = forms.DecimalField(
+        min_value=0.0,
+        widget=forms.NumberInput()
+    )
+
+    start_date = forms.DateField(
+        widget=forms.widgets.DateInput(
+            attrs = {
+                'type': 'date'
+            }
+        )
+    )
+
+    start_time = forms.TimeField(
+        widget=forms.widgets.TimeInput(
+            attrs = {
+                'type': 'time'
+            }
+        )
+    )
+
+    end_date = forms.DateField(
+        widget=forms.widgets.DateInput(
+            attrs = {
+                'type': 'date'
+            }
+        )
+    )
+
+    end_time = forms.TimeField(
+        widget=forms.widgets.TimeInput(
+            attrs = {
+                'type': 'time'
+            }
+        )
     )
 
 

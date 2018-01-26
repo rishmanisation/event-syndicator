@@ -6,13 +6,15 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, get_user_model, login, logout
 
-from .models import Product
-from .forms import AddProductForm
+from .models import Event
+from .forms import AddEventForm
+
+import datetime as dt
 
 # Create your views here.
-class ProductFormView(View):
+class EventFormView(View):
     
-    form_class = AddProductForm
+    form_class = AddEventForm
     template_name = 'event_synd/index.html'
 
     def get(self, request, *args, **kwargs):
@@ -26,24 +28,32 @@ class ProductFormView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             clean = form.cleaned_data
-            prodname = clean['name']
+            eventname = clean['name']
             description = clean['description']
             price = clean['price']
+            start_date = clean['start_date']
+            start_time = clean['start_time']
+            #start_time = dt.datetime.strptime(clean['start_time'], '%H%M').time()
+            end_date = clean['end_date']
+            end_time = clean['end_time']
+            #end_time = dt.datetime.strptime(clean['end_time'], '%H%M').time()
             
-            product_object, created = Product.objects.get_or_create(
-                product_name = prodname,
-                product_description = description,
-                product_price = price,
+            event_object, created = Event.objects.get_or_create(
+                event_name = eventname,
+                event_description = description,
+                event_price = price,
+                event_start_date_time = dt.datetime.combine(start_date, start_time),
+                event_end_date_time = dt.datetime.combine(end_date, end_time)
             )
 
             if created:
                 try:
-                    product_object.save()
+                    event_object.save()
                 except Exception as e:
                     return HttpResponseRedirect(reverse('index'))
             else:
-                product_object.is_syndicated = False
-                product_object.save()
+                event_object.is_syndicated = False
+                event_object.save()
             
             return HttpResponseRedirect(reverse('index'))
 
@@ -52,9 +62,9 @@ class ObjectsView(View):
     template_name = 'event_synd/objects.html'
 
     def get(self, request, *args, **kwargs):
-        products = Product.objects.all()
+        events = Event.objects.all()
         context = {
-            'products': products
+            'events': events
         }
         return render(request, self.template_name, context)
 

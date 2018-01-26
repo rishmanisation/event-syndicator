@@ -1,13 +1,15 @@
-{% if products %}
-    {% for product in products %}
+{% if events %}
+    {% for event in events %}
         <ul>
-            <li> {{ product.product_name }}</li>
-            <li> {{ product.product_description }}</li>
-            <li> {{ product.product_price }}</li>
+            <li> {{ event.event_name }}</li>
+            <li> {{ event.event_description }}</li>
+            <li> {{ event.event_price }}</li>
+            <li> {{ event.event_start_date_time }}</li>
+            <li> {{ event.event_end_date_time }}</li>
         </ul>
     {% endfor %}
 {% else %}
-    <p> No products found </p>
+    <p> No events found </p>
 {% endif %}
 
 <a href="/home">Return home</a>
