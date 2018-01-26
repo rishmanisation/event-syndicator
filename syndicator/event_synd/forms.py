@@ -17,6 +17,13 @@ class AddEventForm(forms.Form):
         })
     )
 
+    currency = forms.CharField(
+        max_length=3,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'CUR'
+        })
+    )
+
     price = forms.DecimalField(
         min_value=0.0,
         widget=forms.NumberInput()
@@ -50,6 +57,15 @@ class AddEventForm(forms.Form):
         widget=forms.widgets.TimeInput(
             attrs = {
                 'type': 'time'
+            }
+        )
+    )
+
+    timezone = forms.CharField(
+        max_length=50,
+        widget=forms.TextInput(
+            attrs = {
+                'placeholder': 'timezone in Olson'
             }
         )
     )

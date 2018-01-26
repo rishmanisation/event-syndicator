@@ -30,6 +30,7 @@ class EventFormView(View):
             clean = form.cleaned_data
             eventname = clean['name']
             description = clean['description']
+            currency = clean['currency']
             price = clean['price']
             start_date = clean['start_date']
             start_time = clean['start_time']
@@ -37,13 +38,16 @@ class EventFormView(View):
             end_date = clean['end_date']
             end_time = clean['end_time']
             #end_time = dt.datetime.strptime(clean['end_time'], '%H%M').time()
+            timezone = clean['timezone']
             
             event_object, created = Event.objects.get_or_create(
                 event_name = eventname,
                 event_description = description,
+                event_currency = currency,
                 event_price = price,
                 event_start_date_time = dt.datetime.combine(start_date, start_time),
-                event_end_date_time = dt.datetime.combine(end_date, end_time)
+                event_end_date_time = dt.datetime.combine(end_date, end_time),
+                event_time_zone = timezone
             )
 
             if created:
