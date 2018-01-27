@@ -5,7 +5,8 @@ class Event(models.Model):
 
     #id = models.CharField(max_length=140, primary_key=True)
     event_name = models.CharField(max_length=140)
-    event_description = models.CharField(max_length=1000)
+    event_description = models.CharField(max_length=10000)
+    event_address = models.CharField(max_length=1000)
     event_currency = models.CharField(max_length=3)
     event_price = models.DecimalField(max_digits=19, decimal_places=2)
     event_start_date_time = models.DateTimeField()
